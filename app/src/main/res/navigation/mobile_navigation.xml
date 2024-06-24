@@ -3,23 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_home">
 
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.pryandroidclinicaodontologo.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_agendaCitaFragment"
+            app:destination="@id/agendaCitaFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_registroAtencionFragment"
+            app:destination="@id/registroAtencionFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_historialMedicoFragment"
+            app:destination="@id/historialMedicoFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.pryandroidclinicaodontologo.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/agendaCitaFragment"
+        android:name="com.example.pryandroidclinicaodontologo.ui.agenda.AgendaCitaFragment"
+        android:label="Agenda de Cita"
+        tools:layout="@layout/fragment_agenda_cita" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.pryandroidclinicaodontologo.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/registroAtencionFragment"
+        android:name="com.example.pryandroidclinicaodontologo.ui.registro.RegistroAtencionFragment"
+        android:label="Registro de Atención"
+        tools:layout="@layout/fragment_registro_atencion" />
+
+    <fragment
+        android:id="@+id/historialMedicoFragment"
+        android:name="com.example.pryandroidclinicaodontologo.ui.historial.HistorialMedicoFragment"
+        android:label="Historial Médico"
+        tools:layout="@layout/fragment_historial_medico" />
+
 </navigation>
