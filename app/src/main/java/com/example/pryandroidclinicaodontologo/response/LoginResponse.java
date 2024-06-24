@@ -48,6 +48,13 @@ public class LoginResponse {
         private String token;
         private String fecha_nac;
 
+        private int rol_id;
+
+
+        public void setRol_id(int rol_id) {
+            this.rol_id = rol_id;
+        }
+
         public String getFechaNacimiento() {
             return fecha_nac;
         }
@@ -151,6 +158,10 @@ public class LoginResponse {
 
         public void setToken(String token) {
             this.token = token;
+        }
+
+        public int getRol_id() {
+            return  rol_id;
         }
     }
 }

@@ -95,7 +95,10 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     LoginResponse loginResponse = response.body();
-                    if (loginResponse.isStatus()) {
+                    int rolId = loginResponse.getData().getRol_id(); // Obtener el rol_id
+                    Log.d(TAG, "rol_id: " + rolId);
+                    if (loginResponse.isStatus() && loginResponse.getData().getRol_id() == 3) {
+
                         String token = loginResponse.getData().getToken();
                         RetrofitClient.API_TOKEN = token;
 
@@ -106,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("token", token);
                         editor.putString("nombreUsuario", loginResponse.getData().getNombre());
                         editor.putString("ape_completo", loginResponse.getData().getApe_completo());
-                        editor.putString("fecha_nac", loginResponse.getData().getFechaNacimiento());
+                        editor.putString("fecha_nac", loginResponse.getData().getFecha_nac());
                         editor.putString("documento", loginResponse.getData().getDocumento());
                         editor.putString("email", loginResponse.getData().getEmail());
                         editor.putString("foto", loginResponse.getData().getFoto());
@@ -119,8 +122,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(MainActivity.this, "Login Failed: " + loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "Login failed: " + loginResponse.getMessage());
+                        String errorMessage = loginResponse.getMessage();
+                        if (loginResponse.getData().getRol_id() != 3) {
+                            errorMessage = "Acceso denegado. Usuario no autorizado.";
+                        }
+                        Toast.makeText(MainActivity.this, "Login Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "Login failed: " + errorMessage);
                     }
                 } else {
                     try {
@@ -150,5 +157,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 }
