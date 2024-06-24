@@ -24,6 +24,9 @@
             android:layout_height="95dp"
             android:src="@drawable/cita_programada"
             android:id="@+id/cita_programada"/>
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="match_parent"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

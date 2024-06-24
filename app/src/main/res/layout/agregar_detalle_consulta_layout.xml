@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/clinicaDark"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/logoClinica"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/llamaclinic"
+            android:contentDescription="Logo de la clínica"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clínica XYZ"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30sp"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corners"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar Paciente: "
+            android:layout_gravity="left"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginEnd="10dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtSeleccionarPaciente"
+            android:layout_gravity="center"
+            android:textColorHint="@color/black"
+            android:hint="    Seleccionar paciente">
+
+            <AutoCompleteTextView
+                android:id="@+id/atcSeleccionarPaciente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diagnóstico: "
+            android:layout_gravity="left"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginEnd="10dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/input_layout_diagnostico"
+            android:layout_gravity="center"
+            android:textColorHint="@color/black"
+            android:hint="Escribe el diagnóstico"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtDiagnostico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:scrollHorizontally="true"
+                android:padding="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tratamiento: "
+            android:layout_gravity="left"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginEnd="10dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/input_layout_tratamiento"
+            android:layout_gravity="center"
+            android:textColorHint="@color/black"
+            android:hint="Escribe el tratamiento"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtTratamiento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:scrollHorizontally="true"
+                android:padding="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Receta Médica: "
+            android:layout_gravity="left"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginEnd="10dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/input_layout_receta"
+            android:layout_gravity="center"
+            android:textColorHint="@color/black"
+            android:hint="Escribe la receta médica"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:scrollHorizontally="true"
+                android:padding="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnConfirmar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/letraDark"
+        android:textColor="@color/black"
+        android:text="Confirmar"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="20dp" />
+
+</LinearLayout>
+
