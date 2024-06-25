@@ -1,6 +1,9 @@
 package com.example.pryandroidclinicaodontologo.retrofit;
 
+import com.example.pryandroidclinicaodontologo.response.CitasResponse;
 import com.example.pryandroidclinicaodontologo.response.LoginResponse;
+import com.example.pryandroidclinicaodontologo.response.OdontologosResponse;
+import com.example.pryandroidclinicaodontologo.response.RegistrarCitaResponse;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -45,10 +48,33 @@ public interface ApiService {
 
     @GET("/img/{filename}")
     Call<LoginResponse> obtenerFoto(@Path("filename") String filename);
+
     @FormUrlEncoded
     @POST("/usuario/cambiarContrasena")
     Call<LoginResponse> cambiarContrasena(
             @Field("id") int id,
             @Field("nuevaContrasena") String nuevaContrasena
+    );
+
+    @GET("/atencion/citas/")
+    Call<CitasResponse> getCitasProgramadas();
+
+    @GET("/atencion/odontologos")
+    Call<OdontologosResponse> getOdontologos();
+
+    @FormUrlEncoded
+    @POST("/atencion/cita/registrar")
+    Call<RegistrarCitaResponse> registrarCita(
+            @Field("paciente_id") int pacienteId,
+            @Field("odontologo_id") int odontologoId,
+            @Field("fecha") String fecha,
+            @Field("hora") String hora,
+            @Field("motivo_consulta") String motivoConsulta
+    );
+
+    @FormUrlEncoded
+    @POST("/atencion/cita/cancelar")
+    Call<Void> cancelarCita(
+            @Field("cita_id") int citaID
     );
 }

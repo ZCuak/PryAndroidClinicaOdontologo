@@ -1,19 +1,120 @@
 package com.example.pryandroidclinicaodontologo.ui.agenda;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.example.pryandroidclinicaodontologo.R;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-public class AgendaCitaFragment extends Fragment {
+import com.example.pryandroidclinicaodontologo.R;
+import com.example.pryandroidclinicaodontologo.adapter.CitasAdapter;
+import com.example.pryandroidclinicaodontologo.databinding.FragmentAgendaCitaBinding;
+import com.example.pryandroidclinicaodontologo.response.CitasResponse;
+import com.example.pryandroidclinicaodontologo.retrofit.RetrofitClient;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class AgendaCitaFragment extends Fragment implements CitasAdapter.CitasAdapterListener {
+
+    private static final String TAG = "AgendaCitaFragment";
+    private FragmentAgendaCitaBinding binding;
+    private CitasAdapter citasAdapter;
+    private List<CitasResponse.Data> citasList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_agenda_cita, container, false);
+        Log.d(TAG, "onCreateView: inflating fragment layout");
+        binding = FragmentAgendaCitaBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "onViewCreated: initializing RecyclerView");
+
+        // Inicializa el RecyclerView y asigna el LayoutManager
+        binding.recyclerViewCitas.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Llamar a la API para obtener las citas programadas
+        Log.d(TAG, "onViewCreated: making API call to getCitasProgramadas");
+        RetrofitClient.createService().getCitasProgramadas().enqueue(new Callback<CitasResponse>() {
+            @Override
+            public void onResponse(Call<CitasResponse> call, Response<CitasResponse> response) {
+                if (response.isSuccessful()) {
+                    CitasResponse citasResponse = response.body();
+                    if (citasResponse != null) {
+                        Log.d(TAG, "onResponse: API call successful, status = " + citasResponse.isStatus());
+                        if (citasResponse.isStatus()) {
+                            citasList = citasResponse.getData();
+                            Log.d(TAG, "onResponse: citasList size = " + citasList.size());
+                            citasAdapter = new CitasAdapter(requireContext(), citasList, AgendaCitaFragment.this);
+
+                            // Utiliza un Handler para asignar el adaptador con un pequeño retraso
+                            new Handler(Looper.getMainLooper()).post(() -> {
+                                Log.d(TAG, "Handler: setting adapter to RecyclerView");
+                                binding.recyclerViewCitas.setAdapter(citasAdapter);
+                            });
+                        } else {
+                            Log.d(TAG, "onResponse: API call returned false, message = " + citasResponse.getMessage());
+                            Toast.makeText(getContext(), "Error: " + citasResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d(TAG, "onResponse: API response body is null");
+                        Toast.makeText(getContext(), "Error: response body is null", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Log.d(TAG, "onResponse: API call failed, response code = " + response.code());
+                    Toast.makeText(getContext(), "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CitasResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: API call failed, error = " + t.getMessage());
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onVerDetalle(CitasResponse.Data cita) {
+        Log.d(TAG, "onVerDetalle: viewing details for citaId = " + cita.getCita_id());
+        // Implementa la lógica para ver los detalles de la cita
+    }
+
+    @Override
+    public void onReprogramarCita(CitasResponse.Data cita) {
+        Log.d(TAG, "onReprogramarCita: reprogramming citaId = " + cita.getCita_id());
+        Toast.makeText(getContext(), "Reprogramar la cita con ID: " + cita.getCita_id(), Toast.LENGTH_SHORT).show();
+        // Implementa la lógica para reprogramar la cita
+    }
+
+    @Override
+    public void onCancelarCita(CitasResponse.Data cita) {
+        Log.d(TAG, "onCancelarCita: canceling citaId = " + cita.getCita_id());
+        Toast.makeText(getContext(), "Cancelar la cita con ID: " + cita.getCita_id(), Toast.LENGTH_SHORT).show();
+        // Implementa la lógica para cancelar la cita
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView: cleaning up");
+        binding = null;
     }
 }
