@@ -16,12 +16,19 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.pryandroidclinicaodontologo.databinding.ActivityAgregarDetalleConsultaFragmentBinding;
+import com.example.pryandroidclinicaodontologo.response.AtencionCompletaResponse;
 import com.example.pryandroidclinicaodontologo.response.DetalleCitaResponse;
+import com.example.pryandroidclinicaodontologo.response.TratamientoIdsResponse;
 import com.example.pryandroidclinicaodontologo.response.TratamientoResponse;
+import com.example.pryandroidclinicaodontologo.retrofit.ApiService;
 import com.example.pryandroidclinicaodontologo.retrofit.RetrofitClient;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,7 +80,7 @@ public class AgregarDetalleConsultaFragment extends Fragment {
                         binding.txtPaciente.setText(citaData.getNombre_paciente());
                         binding.txtMotivoConsulta.setText(citaData.getMotivo_consulta());
                         binding.txtDiagnostico.setText(citaData.getDiagnostico());
-                        binding.txtTratamiento.setText(citaData.getAnotacion());
+                        binding.txtAnotaciones.setText(citaData.getAnotacion());
                     } else {
                         Toast.makeText(getContext(), cita.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -118,7 +125,6 @@ public class AgregarDetalleConsultaFragment extends Fragment {
             }
         });
 
-
         // Configurar el botón para agregar medicamentos
         binding.btnAgregarMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +143,14 @@ public class AgregarDetalleConsultaFragment extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "No hay medicamentos para quitar", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        // Configurar el botón de confirmar
+        binding.btnConfirmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmarRegistro();
             }
         });
     }
@@ -218,6 +232,8 @@ public class AgregarDetalleConsultaFragment extends Fragment {
         txtNombreMedicamento.setEnabled(false);
         txtNombreMedicamento.setFocusable(false);
         txtNombreMedicamento.setBackground(null);
+        txtNombreMedicamento.setId(View.generateViewId());  // Asignar un ID dinámico
+        txtNombreMedicamento.setTag("txtNombreMedicamento"); // Usar una etiqueta para identificar
         medicamentoLayout.addView(txtNombreMedicamento);
 
         EditText txtDosisMedicamento = new EditText(getContext());
@@ -225,11 +241,73 @@ public class AgregarDetalleConsultaFragment extends Fragment {
         txtDosisMedicamento.setEnabled(false);
         txtDosisMedicamento.setFocusable(false);
         txtDosisMedicamento.setBackground(null);
+        txtDosisMedicamento.setId(View.generateViewId());  // Asignar un ID dinámico
+        txtDosisMedicamento.setTag("txtDosisMedicamento"); // Usar una etiqueta para identificar
         medicamentoLayout.addView(txtDosisMedicamento);
 
         medicamentosViews.add(medicamentoLayout);
         binding.contenedorMedicamentos.addView(medicamentoLayout);
     }
+
+
+    private void confirmarRegistro() {
+        // Obtener tratamientos seleccionados
+        List<Integer> tratamientosSeleccionadosIds = new ArrayList<>();
+        for (int index : tratamientosSeleccionados) {
+            tratamientosSeleccionadosIds.add(tratamientosList.get(index).getId());
+        }
+
+        // Obtener recetas
+        List<String> recetasList = new ArrayList<>();
+        for (View medicamentoView : medicamentosViews) {
+            Map<String, String> receta = new HashMap<>();
+            EditText txtNombreMedicamento = medicamentoView.findViewWithTag("txtNombreMedicamento");
+            EditText txtDosisMedicamento = medicamentoView.findViewWithTag("txtDosisMedicamento");
+            receta.put("medicamento", txtNombreMedicamento.getText().toString());
+            receta.put("dosis", txtDosisMedicamento.getText().toString());
+            recetasList.add(new Gson().toJson(receta));  // Convertimos la receta a un string JSON
+        }
+
+        // Enviar la solicitud
+        ApiService apiService = RetrofitClient.createService();
+        Call<AtencionCompletaResponse> call = apiService.registrarCompleta(
+                citaId,
+                binding.txtDiagnostico.getText().toString(),
+                binding.txtAnotaciones.getText().toString(),
+                tratamientosSeleccionadosIds,
+                recetasList
+        );
+        call.enqueue(new Callback<AtencionCompletaResponse>() {
+            @Override
+            public void onResponse(Call<AtencionCompletaResponse> call, Response<AtencionCompletaResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    AtencionCompletaResponse atencionResponse = response.body();
+                    if (atencionResponse.isStatus()) {
+                        Toast.makeText(getContext(), "Registro completo exitosamente", Toast.LENGTH_SHORT).show();
+                        requireActivity().getSupportFragmentManager().popBackStack();
+                    } else {
+                        Toast.makeText(getContext(), "Error al registrar: " + atencionResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    try {
+                        // Registrar el cuerpo de la respuesta para depuración
+                        Log.e("AgregarDetalleConsultaFragment", "Error en la respuesta del servidor: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(getContext(), "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AtencionCompletaResponse> call, Throwable t) {
+                Log.e("AgregarDetalleConsultaFragment", "Error: " + t.getMessage());
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
     @Override
     public void onDestroyView() {
