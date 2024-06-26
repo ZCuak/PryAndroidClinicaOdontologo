@@ -4,5 +4,5 @@
         android:title="Registrar Atencion" />
     <item
         android:id="@+id/action_cancelar"
-        android:title="Cancelar cita" />
+        android:title="Ver historial" />
 </menu>

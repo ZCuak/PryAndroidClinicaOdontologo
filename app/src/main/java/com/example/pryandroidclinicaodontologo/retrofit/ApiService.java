@@ -1,9 +1,11 @@
 package com.example.pryandroidclinicaodontologo.retrofit;
 
 import com.example.pryandroidclinicaodontologo.response.CitasResponse;
+import com.example.pryandroidclinicaodontologo.response.DetalleCitaResponse;
 import com.example.pryandroidclinicaodontologo.response.LoginResponse;
 import com.example.pryandroidclinicaodontologo.response.OdontologosResponse;
 import com.example.pryandroidclinicaodontologo.response.RegistrarCitaResponse;
+import com.example.pryandroidclinicaodontologo.response.TratamientoResponse;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -81,6 +83,9 @@ public interface ApiService {
     @GET("/atencion/citas-por-odontologo/{odontologo_id}")
     Call<CitasResponse> getCitasPorOdontologo(@Path("odontologo_id") int odontologoId);
 
-    @GET("/atencion/detalle-cita/{id}")
-    Call<CitasResponse> obtenerDetalleCita(@Path("id") int id);
+    @GET("/atencion/detalle-cita/{cita_id}")
+    Call<DetalleCitaResponse> obtenerDetalleCita(@Path("cita_id") int citaId);
+
+    @GET("/tratamiento/lista")
+    Call<TratamientoResponse> getTratamientos();
 }

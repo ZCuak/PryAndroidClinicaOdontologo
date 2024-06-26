@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.pryandroidclinicaodontologo.R;
@@ -117,8 +118,13 @@ public class AgendaCitaFragment extends Fragment implements CitasAdapter.CitasAd
         Log.d(TAG, "onRegistrarAtencion: reprogramming citaId = " + cita.getCita_id());
         Toast.makeText(getContext(), "Reprogramar la cita con ID: " + cita.getCita_id(), Toast.LENGTH_SHORT).show();
 
-        // Navegar al nuevo fragmento
-        Navigation.findNavController(getView()).navigate(R.id.action_agendaCitaFragment_to_agregarDetalleConsultaFragment);
+        // Crear un bundle y agregar el cita_id
+        Bundle bundle = new Bundle();
+        bundle.putInt("cita_id", cita.getCita_id());
+
+        // Navegar al fragmento AgregarDetalleConsultaFragment pasando el bundle
+        NavHostFragment.findNavController(AgendaCitaFragment.this)
+                .navigate(R.id.action_agendaCitaFragment_to_agregarDetalleConsultaFragment, bundle);
     }
 
     @Override
