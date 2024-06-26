@@ -77,4 +77,10 @@ public interface ApiService {
     Call<Void> cancelarCita(
             @Field("cita_id") int citaID
     );
+
+    @GET("/atencion/citas-por-odontologo/{odontologo_id}")
+    Call<CitasResponse> getCitasPorOdontologo(@Path("odontologo_id") int odontologoId);
+
+    @GET("/atencion/detalle-cita/{id}")
+    Call<CitasResponse> obtenerDetalleCita(@Path("id") int id);
 }

@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     if (loginResponse.isStatus() && loginResponse.getData().getRol_id() == 3) {
 
                         String token = loginResponse.getData().getToken();
+                        int odontologoId = loginResponse.getData().getId(); // Supongamos que el ID del odontólogo es el ID del usuario
                         RetrofitClient.API_TOKEN = token;
 
                         // Guardar el token y los datos del usuario en SharedPreferences
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("username", loginResponse.getData().getNombre_usuario());
                         editor.putString("token", token);
+                        editor.putInt("odontologo_id", odontologoId); // Guardar el ID del odontólogo
                         editor.putString("nombreUsuario", loginResponse.getData().getNombre());
                         editor.putString("ape_completo", loginResponse.getData().getApe_completo());
                         editor.putString("fecha_nac", loginResponse.getData().getFecha_nac());

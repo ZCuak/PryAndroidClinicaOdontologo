@@ -22,7 +22,7 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.CitaViewHold
 
     public interface CitasAdapterListener {
         void onVerDetalle(CitasResponse.Data cita);
-        void onReprogramarCita(CitasResponse.Data cita);
+        void onRegistrarAtencion(CitasResponse.Data cita);
         void onCancelarCita(CitasResponse.Data cita);
     }
 
@@ -76,7 +76,7 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.CitaViewHold
             public boolean onMenuItemClick(MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.action_reprogramar) {
-                    listener.onReprogramarCita(cita);
+                    listener.onRegistrarAtencion(cita);
                     return true;
                 } else if (itemId == R.id.action_cancelar) {
                     listener.onCancelarCita(cita);

@@ -42,39 +42,49 @@
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            />
+            android:layout_height="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Seleccionar Paciente: "
+            android:text="Paciente: "
             android:layout_gravity="left"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginEnd="10dp"/>
 
-        <com.google.android.material.textfield.TextInputLayout
+        <TextView
+            android:id="@+id/txtPaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtSeleccionarPaciente"
-            android:layout_gravity="center"
-            android:textColorHint="@color/black"
-            android:hint="    Seleccionar paciente">
-
-            <AutoCompleteTextView
-                android:id="@+id/atcSeleccionarPaciente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            />
+            android:layout_height="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Motivo de Consulta: "
+            android:layout_gravity="left"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:id="@+id/txtMotivoConsulta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -109,8 +119,7 @@
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            />
+            android:layout_height="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -145,8 +154,7 @@
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            />
+            android:layout_height="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -181,8 +189,7 @@
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            />
+            android:layout_height="20dp"/>
     </LinearLayout>
 
     <Button
@@ -191,11 +198,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="@color/letraDark"
-        android:textColor="@color/black"
         android:text="Confirmar"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:cornerRadius="20dp" />
 
 </LinearLayout>
-

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.pryandroidclinicaodontologo.R;
@@ -50,9 +51,23 @@ public class AgendaCitaFragment extends Fragment implements CitasAdapter.CitasAd
         // Inicializa el RecyclerView y asigna el LayoutManager
         binding.recyclerViewCitas.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Llamar a la API para obtener las citas programadas
-        Log.d(TAG, "onViewCreated: making API call to getCitasProgramadas");
-        RetrofitClient.createService().getCitasProgramadas().enqueue(new Callback<CitasResponse>() {
+        // Obtener el ID del odontólogo desde SharedPreferences
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserPrefs", getContext().MODE_PRIVATE);
+        int odontologoId = sharedPreferences.getInt("odontologo_id", -1);
+
+        // Imprimir el ID del odontólogo
+        Log.d(TAG, "ID del odontólogo: " + odontologoId);
+
+        // Verificar que el ID del odontólogo sea válido
+        if (odontologoId == -1) {
+            Toast.makeText(getContext(), "Error: ID de odontólogo no válido", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "ID de odontólogo no válido");
+            return;
+        }
+
+        // Llamar a la API para obtener las citas filtradas por odontólogo
+        Log.d(TAG, "onViewCreated: making API call to getCitasPorOdontologo");
+        RetrofitClient.createService().getCitasPorOdontologo(odontologoId).enqueue(new Callback<CitasResponse>() {
             @Override
             public void onResponse(Call<CitasResponse> call, Response<CitasResponse> response) {
                 if (response.isSuccessful()) {
@@ -98,10 +113,12 @@ public class AgendaCitaFragment extends Fragment implements CitasAdapter.CitasAd
     }
 
     @Override
-    public void onReprogramarCita(CitasResponse.Data cita) {
-        Log.d(TAG, "onReprogramarCita: reprogramming citaId = " + cita.getCita_id());
+    public void onRegistrarAtencion(CitasResponse.Data cita) {
+        Log.d(TAG, "onRegistrarAtencion: reprogramming citaId = " + cita.getCita_id());
         Toast.makeText(getContext(), "Reprogramar la cita con ID: " + cita.getCita_id(), Toast.LENGTH_SHORT).show();
-        // Implementa la lógica para reprogramar la cita
+
+        // Navegar al nuevo fragmento
+        Navigation.findNavController(getView()).navigate(R.id.action_agendaCitaFragment_to_agregarDetalleConsultaFragment);
     }
 
     @Override

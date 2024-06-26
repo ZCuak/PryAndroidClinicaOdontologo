@@ -7,6 +7,7 @@ public class CitasResponse {
     private String message;
     private List<Data> data;
 
+    // Getters y Setters
     public boolean isStatus() {
         return status;
     }

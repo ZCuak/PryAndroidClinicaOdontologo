@@ -25,7 +25,11 @@
         android:id="@+id/agendaCitaFragment"
         android:name="com.example.pryandroidclinicaodontologo.ui.agenda.AgendaCitaFragment"
         android:label="Agenda de Cita"
-        tools:layout="@layout/fragment_agenda_cita" />
+        tools:layout="@layout/fragment_agenda_cita">
+        <action
+            android:id="@+id/action_agendaCitaFragment_to_agregarDetalleConsultaFragment"
+            app:destination="@id/agregarDetalleConsultaFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/registroAtencionFragment"
@@ -38,5 +42,15 @@
         android:name="com.example.pryandroidclinicaodontologo.ui.historial.HistorialMedicoFragment"
         android:label="Historial Médico"
         tools:layout="@layout/fragment_historial_medico" />
+
+    <fragment
+        android:id="@+id/agregarDetalleConsultaFragment"
+        android:name="com.example.pryandroidclinicaodontologo.ui.agenda.AgregarDetalleConsultaFragment"
+        android:label="Agregar Detalle Consulta"
+        tools:layout="@layout/activity_agregar_detalle_consulta_fragment">
+        <argument
+            android:name="cita_id"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>
