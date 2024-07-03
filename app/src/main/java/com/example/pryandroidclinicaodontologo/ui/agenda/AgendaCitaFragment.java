@@ -110,7 +110,12 @@ public class AgendaCitaFragment extends Fragment implements CitasAdapter.CitasAd
     @Override
     public void onVerDetalle(CitasResponse.Data cita) {
         Log.d(TAG, "onVerDetalle: viewing details for citaId = " + cita.getCita_id());
-        // Implementa la lógica para ver los detalles de la cita
+        // Crear un bundle y agregar el cita_id
+        Bundle bundle = new Bundle();
+        bundle.putInt("cita_id", cita.getCita_id());
+        NavHostFragment.findNavController(AgendaCitaFragment.this)
+                .navigate(R.id.action_nav_home_to_notificacionFragment, bundle);
+
     }
 
     @Override

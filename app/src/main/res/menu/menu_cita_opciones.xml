@@ -5,4 +5,7 @@
     <item
         android:id="@+id/action_cancelar"
         android:title="Ver historial" />
+    <item
+        android:id="@+id/action_noti"
+        android:title="Notificaciones" />
 </menu>

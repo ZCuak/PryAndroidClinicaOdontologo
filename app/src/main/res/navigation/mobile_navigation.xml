@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_nav_home_to_historialMedicoFragment"
             app:destination="@id/historialMedicoFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_notificacionFragment"
+            app:destination="@id/notificacionFragment" />
     </fragment>
 
     <fragment
@@ -32,6 +35,9 @@
         <action
             android:id="@+id/action_agendaCitaFragment_to_detalleHistorialFragment"
             app:destination="@id/detalleHistorialFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_notificacionFragment"
+            app:destination="@id/notificacionFragment" />
     </fragment>
 
     <fragment
@@ -61,6 +67,12 @@
         android:name="com.example.pryandroidclinicaodontologo.ui.agenda.DetalleHistorialFragment"
         android:label="Detalle Historial"
         tools:layout="@layout/fragment_detalle_historial_paciente" />
+
+    <fragment
+        android:id="@+id/notificacionFragment"
+        android:name="com.example.pryandroidclinicaodontologo.ui.agenda.NotificacionesFragment"
+        android:label="Notificaciones del paciente"
+        tools:layout="@layout/fragment_notificaciones" />
 
 
 </navigation>

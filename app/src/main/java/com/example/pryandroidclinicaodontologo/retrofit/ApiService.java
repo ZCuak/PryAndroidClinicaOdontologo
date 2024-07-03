@@ -5,6 +5,7 @@ import com.example.pryandroidclinicaodontologo.response.CitasResponse;
 import com.example.pryandroidclinicaodontologo.response.DetalleCitaResponse;
 import com.example.pryandroidclinicaodontologo.response.HistorialResponse;
 import com.example.pryandroidclinicaodontologo.response.LoginResponse;
+import com.example.pryandroidclinicaodontologo.response.NotificacionesResponse;
 import com.example.pryandroidclinicaodontologo.response.OdontologosResponse;
 import com.example.pryandroidclinicaodontologo.response.RegistrarCitaResponse;
 import com.example.pryandroidclinicaodontologo.response.TratamientoIdsResponse;
@@ -113,5 +114,8 @@ public interface ApiService {
 
     @GET("atencion/detalle-historial2/{cita_id}")
     Call<HistorialResponse> getDetalleHistorialPorCita(@Path("cita_id") int citaId);
+
+    @GET("/notificacion/lista/{cita_id}")
+    Call<NotificacionesResponse> getNotificaciones(@Path("cita_id") int citaId);
 
 }

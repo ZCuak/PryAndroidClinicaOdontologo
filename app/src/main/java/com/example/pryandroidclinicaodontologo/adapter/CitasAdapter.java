@@ -81,6 +81,9 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.CitaViewHold
                 } else if (itemId == R.id.action_cancelar) {
                     listener.onCancelarCita(cita);
                     return true;
+                }else if (itemId == R.id.action_noti) {
+                    listener.onVerDetalle(cita);
+                    return true;
                 } else {
                     return false;
                 }
