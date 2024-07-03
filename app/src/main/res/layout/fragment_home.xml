@@ -37,17 +37,10 @@
                     android:id="@+id/txtNombreUsuario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jane Doe"
+                    android:text="Bienvenido"
                     android:textColor="@color/letraDark"
                     android:textSize="25sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bienvenido"
-                    android:textColor="@color/letraDark"
-                    android:textSize="18sp" />
             </LinearLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -103,84 +96,56 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:paddingTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@color/letraDark"
-                android:id="@+id/layoutRegistroAtencion"
-                android:foreground="?attr/selectableItemBackground">
+<!--        <LinearLayout-->
+<!--            android:paddingTop="20dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:orientation="vertical"-->
+<!--                android:gravity="center"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:background="@color/letraDark"-->
+<!--                android:id="@+id/layoutHistorialMedico"-->
+<!--                android:foreground="?attr/selectableItemBackground">-->
 
-                <ImageButton
-                    android:layout_width="60sp"
-                    android:layout_height="68dp"
-                    android:background="@android:color/transparent"
-                    android:paddingTop="10sp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/agregar_cita"
-                    android:clickable="false"/>
+<!--                <ImageButton-->
+<!--                    android:layout_width="60sp"-->
+<!--                    android:layout_height="68dp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:paddingTop="10sp"-->
+<!--                    android:scaleType="fitCenter"-->
+<!--                    android:src="@drawable/ver_cita"-->
+<!--                    android:clickable="false"/>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Registro atención del paciente"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:clickable="false"/>
-            </LinearLayout>
-        </LinearLayout>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Historial medico del paciente"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:clickable="false"/>-->
+<!--            </LinearLayout>-->
 
-        <LinearLayout
-            android:paddingTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@color/letraDark"
-                android:id="@+id/layoutHistorialMedico"
-                android:foreground="?attr/selectableItemBackground">
-
-                <ImageButton
-                    android:layout_width="60sp"
-                    android:layout_height="68dp"
-                    android:background="@android:color/transparent"
-                    android:paddingTop="10sp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ver_cita"
-                    android:clickable="false"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Historial medico del paciente"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:clickable="false"/>
-            </LinearLayout>
-
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="20dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imagen_perfil_usuario2"
+            android:layout_width="280sp"
+            android:layout_height="280sp"
+            android:src="@drawable/llamaclinic"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="2dp"
+            android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"

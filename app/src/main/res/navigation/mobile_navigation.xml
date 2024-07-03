@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_agendaCitaFragment_to_agregarDetalleConsultaFragment"
             app:destination="@id/agregarDetalleConsultaFragment" />
+        <action
+            android:id="@+id/action_agendaCitaFragment_to_detalleHistorialFragment"
+            app:destination="@id/detalleHistorialFragment" />
     </fragment>
 
     <fragment
@@ -52,5 +55,12 @@
             android:name="cita_id"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/detalleHistorialFragment"
+        android:name="com.example.pryandroidclinicaodontologo.ui.agenda.DetalleHistorialFragment"
+        android:label="Detalle Historial"
+        tools:layout="@layout/fragment_detalle_historial_paciente" />
+
 
 </navigation>

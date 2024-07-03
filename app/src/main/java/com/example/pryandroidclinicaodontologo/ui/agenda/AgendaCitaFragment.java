@@ -129,10 +129,18 @@ public class AgendaCitaFragment extends Fragment implements CitasAdapter.CitasAd
 
     @Override
     public void onCancelarCita(CitasResponse.Data cita) {
-        Log.d(TAG, "onCancelarCita: canceling citaId = " + cita.getCita_id());
-        Toast.makeText(getContext(), "Cancelar la cita con ID: " + cita.getCita_id(), Toast.LENGTH_SHORT).show();
-        // Implementa la lógica para cancelar la cita
+        Log.d(TAG, "onCancelarCita: viewing medical history for citaId = " + cita.getCita_id());
+        Toast.makeText(getContext(), "Ver historial médico del paciente con ID de cita: " + cita.getCita_id(), Toast.LENGTH_SHORT).show();
+
+        // Crear un bundle y agregar el cita_id
+        Bundle bundle = new Bundle();
+        bundle.putInt("cita_id", cita.getCita_id());
+
+        // Navegar al fragmento DetalleHistorialFragment pasando el bundle
+        NavHostFragment.findNavController(AgendaCitaFragment.this)
+                .navigate(R.id.action_agendaCitaFragment_to_detalleHistorialFragment, bundle);
     }
+
 
     @Override
     public void onDestroyView() {

@@ -3,6 +3,7 @@ package com.example.pryandroidclinicaodontologo.retrofit;
 import com.example.pryandroidclinicaodontologo.response.AtencionCompletaResponse;
 import com.example.pryandroidclinicaodontologo.response.CitasResponse;
 import com.example.pryandroidclinicaodontologo.response.DetalleCitaResponse;
+import com.example.pryandroidclinicaodontologo.response.HistorialResponse;
 import com.example.pryandroidclinicaodontologo.response.LoginResponse;
 import com.example.pryandroidclinicaodontologo.response.OdontologosResponse;
 import com.example.pryandroidclinicaodontologo.response.RegistrarCitaResponse;
@@ -110,6 +111,7 @@ public interface ApiService {
     @POST("/tratamiento/obtener_ids")
     Call<TratamientoIdsResponse> obtenerIdsTratamientos(@Body Map<String, List<String>> nombres);
 
-
+    @GET("atencion/detalle-historial2/{cita_id}")
+    Call<HistorialResponse> getDetalleHistorialPorCita(@Path("cita_id") int citaId);
 
 }

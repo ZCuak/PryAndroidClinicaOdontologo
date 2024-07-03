@@ -26,21 +26,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.layoutRegistroAtencion).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_menu);
-                navController.navigate(R.id.action_nav_home_to_registroAtencionFragment);
-            }
-        });
 
-        view.findViewById(R.id.layoutHistorialMedico).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_menu);
-                navController.navigate(R.id.action_nav_home_to_historialMedicoFragment);
-            }
-        });
+//        view.findViewById(R.id.layoutHistorialMedico).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_menu);
+//                navController.navigate(R.id.action_nav_home_to_historialMedicoFragment);
+//            }
+//        });
 
         return view;
     }
